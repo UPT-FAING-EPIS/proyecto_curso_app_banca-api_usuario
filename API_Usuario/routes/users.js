@@ -7,9 +7,13 @@ router.get('/', function(req, res, next) {
 });
 
 // PUT user block
-router.put('/users/:userId/block', async (req, res) => {
+router.put('/:userId/block', async (req, res) => {
   const userId = req.params.userId;
   res.json({ message: `Usuario con Id. ${userId} bloqueado correctamente` });
+});
+
+router.use(function(req, res, next) {
+  res.status(404).json({ message: "La ruta solicitada no existe" });
 });
 
 module.exports = router;
