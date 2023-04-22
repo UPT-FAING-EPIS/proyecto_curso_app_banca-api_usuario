@@ -1,26 +1,25 @@
-import { type } from 'os'
 import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm'
-@Entity({name: 'USUARIOS'})
+@Entity({name: 'users'})
 export class User {
     @PrimaryGeneratedColumn()
     IDUSUARIO : number
 
-    @Column()
+    @Column({nullable:true})
     CORREO: string
 
     @Column({unique:true})
-    USUARIO: string
+    USUARIO: string;
 
     @Column()
-    CLAVE:string
+    CLAVE:string;
 
     @Column({type: 'datetime',default: () => 'CURRENT_TIMESTAMP'})
-    FECHACREACION: Date
+    FECHACREACION: Date;
     
-    @Column()
+    @Column({nullable:true})
     ESTADO:string
 
-    @Column()
+    @Column({nullable:true})
     ROL: string
 
 }
