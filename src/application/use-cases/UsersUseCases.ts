@@ -12,10 +12,20 @@ export class UsersUseCases {
     this.logger.log('Block a user');
 
     const user = await this.usersRepository.getById(id);
+
+    this.logger.log(id);
+    this.logger.log(user);
+
     if (!user) throw new NotFoundException('Usuario no encontrado');
 
     user.estaActivo = false;
 
     return await this.usersRepository.update(id, user);
+  }
+
+  async getAllUsers() : Promise<User[]> {
+    this.logger.log('Get all users');
+
+    return await this.usersRepository.getAll();
   }
 }

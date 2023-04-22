@@ -1,4 +1,4 @@
-import { Controller, Put } from '@nestjs/common';
+import { Controller, Put, Get, Param } from '@nestjs/common';
 import { UsersUseCases } from 'src/application/use-cases/UsersUseCases';
 
 import {
@@ -15,7 +15,14 @@ import { User } from 'src/domain/models/User';
 export class UsersController {
   constructor(private readonly userUseCases: UsersUseCases) {}
 
-  @Put('/:id/block')
+  @Get()
+  @ApiOperation({ summary: 'Obtener todos los usuarios' })
+  @ApiOkResponse({ description: 'Se obtuvieron los datos de todos los usuarios' })
+  getAllUsers(): Promise<User[]> {
+    return this.userUseCases.getAllUsers();
+  }
+
+  @Put(':id/block')
   @ApiParam({
     name: 'id',
     type: Number,
@@ -24,8 +31,7 @@ export class UsersController {
   })
   @ApiOperation({ summary: 'Bloquear usuario' })
   @ApiOkResponse({ description: 'Usuario bloqueado' })
-  @ApiNotFoundResponse({ description: 'Usuario no encontrado' })
-  blockUser(id: number): Promise<User> {
+  blockUser(@Param('id') id: number): Promise<User> {
     return this.userUseCases.blockUser(id);
   }
 }

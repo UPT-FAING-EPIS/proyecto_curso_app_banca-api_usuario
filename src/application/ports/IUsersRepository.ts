@@ -10,12 +10,17 @@ export class IUsersRepository implements IRepository<User> {
   async getById(id: number): Promise<User> {
     const user = new User(1, 'admin@mail.com', 'admin', '12345', new Rol(1, 'ADMINISTRADOR'));
     const users = [user];
-    const userFound = users.find((user) => user.idUsuario === id);
+    const userFound = users.find((user) => user.idUsuario == id);
 
     return userFound;
   }
-  getAll(): Promise<User[]> {
-    throw new Error('Method not implemented.');
+  async getAll(): Promise<User[]> {
+    const users = [
+      new User(1, 'admin@mail.com', 'admin', '12345', new Rol(1, 'ADMINISTRADOR')),
+      new User(2, 'admin@mail.com', 'admin', '12345', new Rol(1, 'ADMINISTRADOR')),
+      new User(3, 'admin@mail.com', 'admin', '12345', new Rol(1, 'ADMINISTRADOR'))]
+
+      return users
   }
   create(entity: User): Promise<User> {
     throw new Error('Method not implemented.');
