@@ -12,9 +12,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         type: 'mysql',
         host: 'api-usuario-db-ins.c5odpn9hksgv.us-east-1.rds.amazonaws.com',
         username: 'su',
-        ssl: true,
+        ssl: false,
         password: 'upt2023-API',
-        database: 'api_usuario',
+        database: 'Api_Usuario',
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true
       }),
