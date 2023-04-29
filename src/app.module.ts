@@ -10,7 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forRoot(
       {
         type: 'mysql',
-        host: 'api-usuario.mysql.database.azure.com',
+        host: 'api-usuario-db-ins.c5odpn9hksgv.us-east-1.rds.amazonaws.com',
         username: 'su',
         ssl: true,
         password: 'upt2023-API',
