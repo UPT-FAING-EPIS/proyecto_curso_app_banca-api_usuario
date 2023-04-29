@@ -1,8 +1,10 @@
-export class CreateUserDto{
-    CORREO: string
-    USUARIO : string
-    CLAVE: string
-    ESTADO: string
-    ROL: string
+export class CreateUserDto {
 
+    name: string;
+    lastname: string;
+    email: string;
+    phone: string;
+    password: string;
+    image?: string;
+    notification_token?: string;
 }

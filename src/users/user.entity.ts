@@ -1,25 +1,43 @@
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm'
-@Entity({name: 'users'})
-export class User {
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, ManyToMany, JoinTable } from "typeorm";
+import { hash } from 'bcrypt';
+
+@Entity({ name: 'users'})
+export class User{
+
     @PrimaryGeneratedColumn()
-    IDUSUARIO : number
-
-    @Column({nullable:true})
-    CORREO: string
-
-    @Column({unique:true})
-    USUARIO: string;
+    id: number
 
     @Column()
-    CLAVE:string;
-
-    @Column({type: 'datetime',default: () => 'CURRENT_TIMESTAMP'})
-    FECHACREACION: Date;
+    name: string;
     
-    @Column({nullable:true})
-    ESTADO:string
+    @Column()
+    lastname: string;
 
-    @Column({nullable:true})
-    ROL: string
+    @Column({ unique: true })
+    email: string;
+    
+    @Column({ unique: true })
+    phone: string;
+    
+    @Column({ nullable: true })
+    image: string;
+    
+    @Column()
+    password: string;
+    
+    @Column({ nullable: true })
+    notification_token: string;
+    
+    @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+    created_at: Date;
+    
+    @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+    updated_at: Date;
 
+    
+    @BeforeInsert()
+    async hashPassword() {
+        this.password = await hash(this.password, Number(process.env.HASH_SALT));
+    }
+    
 }
