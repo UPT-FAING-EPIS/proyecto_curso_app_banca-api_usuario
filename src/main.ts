@@ -15,5 +15,9 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
+  //Configurar servidor con IP address
+  //await app.listen(3000, '192.168.0.3' || 'localhost');
+  //Para lanzar la peticion desde otro dispositivo
 }
 bootstrap();
+
