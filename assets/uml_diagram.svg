@@ -1,0 +1,519 @@
+<svg version="1.1" baseProfile="full" width="4308.0" height="454.0" viewbox="0 0 4308 454" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[AppController|-appService: AppService|+getHello(): string]
+[AppModule||]
+[AppService||+getHello(): string]
+[UsersModule||]
+[AuthController|-authService: AuthService|+register(): Promise&lt;User&gt;;+login(): Promise&lt;{ user: User; token: any; }&gt;]
+[AuthModule||]
+[AuthService|-usersRepository: Repository&lt;User&gt;;-jwtService: JwtService|+register(): Promise&lt;User&gt;;+login(): Promise&lt;{ user: User; token: any; }&gt;]
+[JwtStrategy||+validate(): Promise&lt;{ userId: any; username: any; }&gt;]
+[User|+id: number;+name: string;+lastname: string;+email: string;+phone: string;+image: string;+password: string;+notification_token: string;+created_at: Date;+updated_at: Date|+hashPassword(): Promise&lt;void&gt;]
+[UsersController|-usersService: UsersService|+create(): Promise&lt;User&gt;]
+[UsersModule||]
+[UsersService|-usersRepository: Repository&lt;User&gt;|+create(): Promise&lt;User&gt;]
+[&lt;interface&gt;IRepository&lt;T&gt;||+getById(): Promise&lt;T&gt;;+getAll(): Promise&lt;T\[\]&gt;;+create(): Promise&lt;T&gt;;+update(): Promise&lt;T&gt;;+delete(): Promise&lt;boolean&gt;]
+[IUsersRepository||+getById(): Promise&lt;User&gt;;+getAll(): Promise&lt;User\[\]&gt;;+create(): Promise&lt;User&gt;;+update(): Promise&lt;User&gt;;+delete(): Promise&lt;boolean&gt;]
+[IRepository&lt;T&gt;]&lt;:--[IUsersRepository]
+[UsersUseCases|-logger: Logger;-usersRepository: IUsersRepository|+blockUser(): Promise&lt;User&gt;;+getAllUsers(): Promise&lt;User\[\]&gt;]
+[LoginAuthDto|+email: string;+password: string|]
+[RegisterAuthDto|+name: string;+lastname: string;+email: string;+phone: string;+password: string;+rolesIds: string\[\]|]
+[Rol|+idRol: number;+descripcion: string|]
+[User|+idUsuario: number;+correo: string;+usuario: string;+clave: string;+rol: Rol;+estaActivo: boolean|]
+[UsersController|-userUseCases: UsersUseCases|+getAllUsers(): Promise&lt;User\[\]&gt;;+blockUser(): Promise&lt;User&gt;]
+[CreateUserDto|+name: string;+lastname: string;+email: string;+phone: string;+password: string;+image: string;+notification_token: string|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g transform="translate(0.5, 0.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="454.0" width="4308.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M2929.5 192.3 L2929.5 248 L2929.5 268 L2929.5 268.0 " fill="none"></path>
+</g>
+<path d="M2934.8 192.3 L2929.5 192.3 L2924.2 192.3 L2929.5 179.0 Z"></path>
+<g data-name="AppController">
+<g fill="#eee8d5" stroke="#33322E" data-name="AppController">
+<rect x="0.0" y="68.0" height="93.0" width="211.0" data-name="AppController"></rect>
+<path d="M0.0 99.0 L211.0 99.0" fill="none" data-name="AppController"></path>
+<path d="M0.0 130.0 L211.0 130.0" fill="none" data-name="AppController"></path>
+</g>
+<g transform="translate(0, 68)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AppController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AppController">
+<a id="..\src\app.controller.ts.AppController" xlink:href="..\src\app.controller.ts"><text x="97.5" y="13.5" stroke="none" text-anchor="middle" data-name="AppController">AppController</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 99)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AppController">
+<text x="0.0" y="13.5" stroke="none" data-name="AppController">-appService: AppService</text>
+
+</g>
+</g>
+<g transform="translate(0, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AppController">
+<text x="0.0" y="13.5" stroke="none" data-name="AppController">+getHello(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="AppModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="AppModule">
+<rect x="251.0" y="91.0" height="47.0" width="105.0" data-name="AppModule"></rect>
+<path d="M251.0 122.0 L356.0 122.0" fill="none" data-name="AppModule"></path>
+<path d="M251.0 130.0 L356.0 130.0" fill="none" data-name="AppModule"></path>
+</g>
+<g transform="translate(251, 91)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AppModule">
+<a id="..\src\app.module.ts.AppModule" xlink:href="..\src\app.module.ts"><text x="44.5" y="13.5" stroke="none" text-anchor="middle" data-name="AppModule">AppModule</text></a>
+
+</g>
+</g>
+<g transform="translate(251, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppModule">
+
+</g>
+</g>
+<g transform="translate(251, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppModule">
+
+</g>
+</g>
+</g>
+<g data-name="AppService">
+<g fill="#eee8d5" stroke="#33322E" data-name="AppService">
+<rect x="396.0" y="79.0" height="70.0" width="157.0" data-name="AppService"></rect>
+<path d="M396.0 110.0 L553.0 110.0" fill="none" data-name="AppService"></path>
+<path d="M396.0 118.0 L553.0 118.0" fill="none" data-name="AppService"></path>
+</g>
+<g transform="translate(396, 79)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AppService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AppService">
+<a id="..\src\app.service.ts.AppService" xlink:href="..\src\app.service.ts"><text x="70.5" y="13.5" stroke="none" text-anchor="middle" data-name="AppService">AppService</text></a>
+
+</g>
+</g>
+<g transform="translate(396, 110)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppService">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppService">
+
+</g>
+</g>
+<g transform="translate(396, 118)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AppService">
+<text x="0.0" y="13.5" stroke="none" data-name="AppService">+getHello(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersModule">
+<rect x="593.0" y="91.0" height="47.0" width="120.0" data-name="UsersModule"></rect>
+<path d="M593.0 122.0 L713.0 122.0" fill="none" data-name="UsersModule"></path>
+<path d="M593.0 130.0 L713.0 130.0" fill="none" data-name="UsersModule"></path>
+</g>
+<g transform="translate(593, 91)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersModule">
+<a id="..\src\users\users.module.ts.UsersModule" xlink:href="..\src\users\users.module.ts"><text x="52.0" y="13.5" stroke="none" text-anchor="middle" data-name="UsersModule">UsersModule</text></a>
+
+</g>
+</g>
+<g transform="translate(593, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UsersModule">
+
+</g>
+</g>
+<g transform="translate(593, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UsersModule">
+
+</g>
+</g>
+</g>
+<g data-name="AuthController">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthController">
+<rect x="753.0" y="45.0" height="138.0" width="253.0" data-name="AuthController"></rect>
+<path d="M753.0 76.0 L1006.0 76.0" fill="none" data-name="AuthController"></path>
+<path d="M753.0 107.0 L1006.0 107.0" fill="none" data-name="AuthController"></path>
+</g>
+<g transform="translate(753, 45)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthController">
+<a id="..\src\auth\auth.controller.ts.AuthController" xlink:href="..\src\auth\auth.controller.ts"><text x="118.5" y="13.5" stroke="none" text-anchor="middle" data-name="AuthController">AuthController</text></a>
+
+</g>
+</g>
+<g transform="translate(753, 76)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthController">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthController">-authService: AuthService</text>
+
+</g>
+</g>
+<g transform="translate(753, 107)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthController">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthController">+register(): Promise&lt;User&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthController">+login(): Promise&lt;{ user: User</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AuthController">token: any</text>
+<text x="0.0" y="58.5" stroke="none" data-name="AuthController">}&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="AuthModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthModule">
+<rect x="1046.0" y="91.0" height="47.0" width="110.0" data-name="AuthModule"></rect>
+<path d="M1046.0 122.0 L1156.0 122.0" fill="none" data-name="AuthModule"></path>
+<path d="M1046.0 130.0 L1156.0 130.0" fill="none" data-name="AuthModule"></path>
+</g>
+<g transform="translate(1046, 91)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthModule">
+<a id="..\src\auth\auth.module.ts.AuthModule" xlink:href="..\src\auth\auth.module.ts"><text x="47.0" y="13.5" stroke="none" text-anchor="middle" data-name="AuthModule">AuthModule</text></a>
+
+</g>
+</g>
+<g transform="translate(1046, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthModule">
+
+</g>
+</g>
+<g transform="translate(1046, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthModule">
+
+</g>
+</g>
+</g>
+<g data-name="AuthService">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthService">
+<rect x="1196.0" y="38.0" height="153.0" width="303.0" data-name="AuthService"></rect>
+<path d="M1196.0 69.0 L1499.0 69.0" fill="none" data-name="AuthService"></path>
+<path d="M1196.0 115.0 L1499.0 115.0" fill="none" data-name="AuthService"></path>
+</g>
+<g transform="translate(1196, 38)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthService">
+<a id="..\src\auth\auth.service.ts.AuthService" xlink:href="..\src\auth\auth.service.ts"><text x="143.5" y="13.5" stroke="none" text-anchor="middle" data-name="AuthService">AuthService</text></a>
+
+</g>
+</g>
+<g transform="translate(1196, 69)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthService">-usersRepository: Repository&lt;User&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthService">-jwtService: JwtService</text>
+
+</g>
+</g>
+<g transform="translate(1196, 115)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthService">+register(): Promise&lt;User&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthService">+login(): Promise&lt;{ user: User</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AuthService">token: any</text>
+<text x="0.0" y="58.5" stroke="none" data-name="AuthService">}&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="JwtStrategy">
+<g fill="#eee8d5" stroke="#33322E" data-name="JwtStrategy">
+<rect x="1539.0" y="64.0" height="100.0" width="284.0" data-name="JwtStrategy"></rect>
+<path d="M1539.0 95.0 L1823.0 95.0" fill="none" data-name="JwtStrategy"></path>
+<path d="M1539.0 103.0 L1823.0 103.0" fill="none" data-name="JwtStrategy"></path>
+</g>
+<g transform="translate(1539, 64)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="JwtStrategy">
+<a id="..\src\auth\jwt.strategy.ts.JwtStrategy" xlink:href="..\src\auth\jwt.strategy.ts"><text x="134.0" y="13.5" stroke="none" text-anchor="middle" data-name="JwtStrategy">JwtStrategy</text></a>
+
+</g>
+</g>
+<g transform="translate(1539, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" data-name="JwtStrategy">
+
+</g>
+</g>
+<g transform="translate(1539, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtStrategy">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtStrategy">+validate(): Promise&lt;{ userId: any</text>
+<text x="0.0" y="28.5" stroke="none" data-name="JwtStrategy">username: any</text>
+<text x="0.0" y="43.5" stroke="none" data-name="JwtStrategy">}&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="User">
+<g fill="#eee8d5" stroke="#33322E" data-name="User">
+<rect x="1863.0" y="0.0" height="228.0" width="281.0" data-name="User"></rect>
+<path d="M1863.0 31.0 L2144.0 31.0" fill="none" data-name="User"></path>
+<path d="M1863.0 197.0 L2144.0 197.0" fill="none" data-name="User"></path>
+</g>
+<g transform="translate(1863, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="User">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="User">
+<a id="..\src\domain\models\User.ts.User" xlink:href="..\src\domain\models\User.ts"><text x="132.5" y="13.5" stroke="none" text-anchor="middle" data-name="User">User</text></a>
+
+</g>
+</g>
+<g transform="translate(1863, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="User">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="User">
+<text x="0.0" y="13.5" stroke="none" data-name="User">+id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="User">+name: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="User">+lastname: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="User">+email: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="User">+phone: string</text>
+<text x="0.0" y="88.5" stroke="none" data-name="User">+image: string</text>
+<text x="0.0" y="103.5" stroke="none" data-name="User">+password: string</text>
+<text x="0.0" y="118.5" stroke="none" data-name="User">+notification_token: string</text>
+<text x="0.0" y="133.5" stroke="none" data-name="User">+created_at: Date</text>
+<text x="0.0" y="148.5" stroke="none" data-name="User">+updated_at: Date</text>
+
+</g>
+</g>
+<g transform="translate(1863, 197)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="User">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="User">
+<text x="0.0" y="13.5" stroke="none" data-name="User">+hashPassword(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersController">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersController">
+<rect x="2184.0" y="68.0" height="93.0" width="240.0" data-name="UsersController"></rect>
+<path d="M2184.0 99.0 L2424.0 99.0" fill="none" data-name="UsersController"></path>
+<path d="M2184.0 130.0 L2424.0 130.0" fill="none" data-name="UsersController"></path>
+</g>
+<g transform="translate(2184, 68)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersController">
+<a id="..\src\presentation\controllers\users.controller.ts.UsersController" xlink:href="..\src\presentation\controllers\users.controller.ts"><text x="112.0" y="13.5" stroke="none" text-anchor="middle" data-name="UsersController">UsersController</text></a>
+
+</g>
+</g>
+<g transform="translate(2184, 99)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersController">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersController">-usersService: UsersService</text>
+
+</g>
+</g>
+<g transform="translate(2184, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersController">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersController">+create(): Promise&lt;User&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersService">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersService">
+<rect x="2464.0" y="68.0" height="93.0" width="303.0" data-name="UsersService"></rect>
+<path d="M2464.0 99.0 L2767.0 99.0" fill="none" data-name="UsersService"></path>
+<path d="M2464.0 130.0 L2767.0 130.0" fill="none" data-name="UsersService"></path>
+</g>
+<g transform="translate(2464, 68)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersService">
+<a id="..\src\users\users.service.ts.UsersService" xlink:href="..\src\users\users.service.ts"><text x="143.5" y="13.5" stroke="none" text-anchor="middle" data-name="UsersService">UsersService</text></a>
+
+</g>
+</g>
+<g transform="translate(2464, 99)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersService">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersService">-usersRepository: Repository&lt;User&gt;</text>
+
+</g>
+</g>
+<g transform="translate(2464, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersService">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersService">+create(): Promise&lt;User&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="IRepository&lt;T&gt;">
+<g fill="lightblue" stroke="#33322E" data-name="IRepository&lt;T&gt;">
+<rect x="2807.0" y="49.0" height="130.0" width="245.0" data-name="IRepository&lt;T&gt;"></rect>
+<path d="M2807.0 80.0 L3052.0 80.0" fill="none" data-name="IRepository&lt;T&gt;"></path>
+<path d="M2807.0 88.0 L3052.0 88.0" fill="none" data-name="IRepository&lt;T&gt;"></path>
+</g>
+<g transform="translate(2807, 49)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRepository&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IRepository&lt;T&gt;">
+<a id="..\src\application\ports\IRepository.ts.IRepository&lt;T&gt;" xlink:href="..\src\application\ports\IRepository.ts"><text x="114.5" y="13.5" stroke="none" text-anchor="middle" data-name="IRepository&lt;T&gt;">IRepository&lt;T&gt;</text></a>
+
+</g>
+</g>
+<g transform="translate(2807, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRepository&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IRepository&lt;T&gt;">
+
+</g>
+</g>
+<g transform="translate(2807, 88)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRepository&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IRepository&lt;T&gt;">
+<text x="0.0" y="13.5" stroke="none" data-name="IRepository&lt;T&gt;">+getById(): Promise&lt;T&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="IRepository&lt;T&gt;">+getAll(): Promise&lt;T[]&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="IRepository&lt;T&gt;">+create(): Promise&lt;T&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="IRepository&lt;T&gt;">+update(): Promise&lt;T&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="IRepository&lt;T&gt;">+delete(): Promise&lt;boolean&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="IUsersRepository">
+<g fill="#eee8d5" stroke="#33322E" data-name="IUsersRepository">
+<rect x="2807.0" y="268.0" height="130.0" width="245.0" data-name="IUsersRepository"></rect>
+<path d="M2807.0 299.0 L3052.0 299.0" fill="none" data-name="IUsersRepository"></path>
+<path d="M2807.0 307.0 L3052.0 307.0" fill="none" data-name="IUsersRepository"></path>
+</g>
+<g transform="translate(2807, 268)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="IUsersRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IUsersRepository">
+<a id="..\src\application\ports\IUsersRepository.ts.IUsersRepository" xlink:href="..\src\application\ports\IUsersRepository.ts"><text x="114.5" y="13.5" stroke="none" text-anchor="middle" data-name="IUsersRepository">IUsersRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(2807, 299)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IUsersRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IUsersRepository">
+
+</g>
+</g>
+<g transform="translate(2807, 307)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IUsersRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IUsersRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="IUsersRepository">+getById(): Promise&lt;User&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="IUsersRepository">+getAll(): Promise&lt;User[]&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="IUsersRepository">+create(): Promise&lt;User&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="IUsersRepository">+update(): Promise&lt;User&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="IUsersRepository">+delete(): Promise&lt;boolean&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersUseCases">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersUseCases">
+<rect x="3092.0" y="53.0" height="123.0" width="297.0" data-name="UsersUseCases"></rect>
+<path d="M3092.0 84.0 L3389.0 84.0" fill="none" data-name="UsersUseCases"></path>
+<path d="M3092.0 130.0 L3389.0 130.0" fill="none" data-name="UsersUseCases"></path>
+</g>
+<g transform="translate(3092, 53)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersUseCases">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersUseCases">
+<a id="..\src\application\use-cases\UsersUseCases.ts.UsersUseCases" xlink:href="..\src\application\use-cases\UsersUseCases.ts"><text x="140.5" y="13.5" stroke="none" text-anchor="middle" data-name="UsersUseCases">UsersUseCases</text></a>
+
+</g>
+</g>
+<g transform="translate(3092, 84)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersUseCases">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersUseCases">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersUseCases">-logger: Logger</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersUseCases">-usersRepository: IUsersRepository</text>
+
+</g>
+</g>
+<g transform="translate(3092, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersUseCases">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersUseCases">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersUseCases">+blockUser(): Promise&lt;User&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersUseCases">+getAllUsers(): Promise&lt;User[]&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="LoginAuthDto">
+<g fill="#eee8d5" stroke="#33322E" data-name="LoginAuthDto">
+<rect x="3429.0" y="72.0" height="85.0" width="156.0" data-name="LoginAuthDto"></rect>
+<path d="M3429.0 103.0 L3585.0 103.0" fill="none" data-name="LoginAuthDto"></path>
+<path d="M3429.0 149.0 L3585.0 149.0" fill="none" data-name="LoginAuthDto"></path>
+</g>
+<g transform="translate(3429, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="LoginAuthDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LoginAuthDto">
+<a id="..\src\auth\dto\login-auth.dto.ts.LoginAuthDto" xlink:href="..\src\auth\dto\login-auth.dto.ts"><text x="70.0" y="13.5" stroke="none" text-anchor="middle" data-name="LoginAuthDto">LoginAuthDto</text></a>
+
+</g>
+</g>
+<g transform="translate(3429, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginAuthDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoginAuthDto">
+<text x="0.0" y="13.5" stroke="none" data-name="LoginAuthDto">+email: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="LoginAuthDto">+password: string</text>
+
+</g>
+</g>
+<g transform="translate(3429, 149)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginAuthDto">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LoginAuthDto">
+
+</g>
+</g>
+</g>
+<g data-name="RegisterAuthDto">
+<g fill="#eee8d5" stroke="#33322E" data-name="RegisterAuthDto">
+<rect x="3625.0" y="42.0" height="145.0" width="156.0" data-name="RegisterAuthDto"></rect>
+<path d="M3625.0 73.0 L3781.0 73.0" fill="none" data-name="RegisterAuthDto"></path>
+<path d="M3625.0 179.0 L3781.0 179.0" fill="none" data-name="RegisterAuthDto"></path>
+</g>
+<g transform="translate(3625, 42)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="RegisterAuthDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RegisterAuthDto">
+<a id="..\src\auth\dto\register-auth.dto.ts.RegisterAuthDto" xlink:href="..\src\auth\dto\register-auth.dto.ts"><text x="70.0" y="13.5" stroke="none" text-anchor="middle" data-name="RegisterAuthDto">RegisterAuthDto</text></a>
+
+</g>
+</g>
+<g transform="translate(3625, 73)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RegisterAuthDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RegisterAuthDto">
+<text x="0.0" y="13.5" stroke="none" data-name="RegisterAuthDto">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="RegisterAuthDto">+lastname: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="RegisterAuthDto">+email: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="RegisterAuthDto">+phone: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="RegisterAuthDto">+password: string</text>
+<text x="0.0" y="88.5" stroke="none" data-name="RegisterAuthDto">+rolesIds: string[]</text>
+
+</g>
+</g>
+<g transform="translate(3625, 179)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RegisterAuthDto">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RegisterAuthDto">
+
+</g>
+</g>
+</g>
+<g data-name="Rol">
+<g fill="#eee8d5" stroke="#33322E" data-name="Rol">
+<rect x="3821.0" y="72.0" height="85.0" width="171.0" data-name="Rol"></rect>
+<path d="M3821.0 103.0 L3992.0 103.0" fill="none" data-name="Rol"></path>
+<path d="M3821.0 149.0 L3992.0 149.0" fill="none" data-name="Rol"></path>
+</g>
+<g transform="translate(3821, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Rol">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Rol">
+<a id="..\src\domain\models\Rol.ts.Rol" xlink:href="..\src\domain\models\Rol.ts"><text x="77.5" y="13.5" stroke="none" text-anchor="middle" data-name="Rol">Rol</text></a>
+
+</g>
+</g>
+<g transform="translate(3821, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Rol">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Rol">
+<text x="0.0" y="13.5" stroke="none" data-name="Rol">+idRol: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Rol">+descripcion: string</text>
+
+</g>
+</g>
+<g transform="translate(3821, 149)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Rol">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Rol">
+
+</g>
+</g>
+</g>
+<g data-name="CreateUserDto">
+<g fill="#eee8d5" stroke="#33322E" data-name="CreateUserDto">
+<rect x="4032.0" y="34.0" height="160.0" width="220.0" data-name="CreateUserDto"></rect>
+<path d="M4032.0 65.0 L4252.0 65.0" fill="none" data-name="CreateUserDto"></path>
+<path d="M4032.0 186.0 L4252.0 186.0" fill="none" data-name="CreateUserDto"></path>
+</g>
+<g transform="translate(4032, 34)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CreateUserDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CreateUserDto">
+<a id="..\src\users\dto\create-user.dto.ts.CreateUserDto" xlink:href="..\src\users\dto\create-user.dto.ts"><text x="102.0" y="13.5" stroke="none" text-anchor="middle" data-name="CreateUserDto">CreateUserDto</text></a>
+
+</g>
+</g>
+<g transform="translate(4032, 65)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateUserDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CreateUserDto">
+<text x="0.0" y="13.5" stroke="none" data-name="CreateUserDto">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="CreateUserDto">+lastname: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="CreateUserDto">+email: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="CreateUserDto">+phone: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="CreateUserDto">+password: string</text>
+<text x="0.0" y="88.5" stroke="none" data-name="CreateUserDto">+image: string</text>
+<text x="0.0" y="103.5" stroke="none" data-name="CreateUserDto">+notification_token: string</text>
+
+</g>
+</g>
+<g transform="translate(4032, 186)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateUserDto">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CreateUserDto">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
