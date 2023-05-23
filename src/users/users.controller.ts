@@ -8,6 +8,7 @@ import {
     ApiOkResponse,
     ApiNotFoundResponse,
   } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('users')
 @Controller('users')
@@ -20,7 +21,11 @@ export class UsersController {
     // PUT ' PATCH -> ACTUALIZAR
     // DELETE ' => BORRAR
 
-
+    @UseGuards(JwtAuthGuard)
+    @Get() // http://localhost/users -> GET
+    findAll(){
+        return this.usersService.findAll();
+    }
 
     @ApiOperation({ summary: 'Registrar usuario' })
     @ApiOkResponse({ description: 'Registra al usuario' })
