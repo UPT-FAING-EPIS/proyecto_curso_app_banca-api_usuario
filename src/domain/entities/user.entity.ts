@@ -27,7 +27,7 @@ export class User {
   @Column({ nullable: true })
   notification_token: string
 
-  @Column({ default: () => true })
+  @Column({ default: true })
   is_active: boolean
 
   @Column({

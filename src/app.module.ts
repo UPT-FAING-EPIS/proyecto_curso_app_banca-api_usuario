@@ -7,8 +7,8 @@ import { UsersUseCases } from 'application/use-cases/UsersUseCases'
 import { JwtModule } from '@nestjs/jwt'
 import { jwtConstants } from 'infrastructure/auth/jwt.constants'
 import { JwtStrategy } from 'infrastructure/auth/jwt.strategy'
-import { User } from 'domain/entities/user.entity'
 import { UsersRepository } from 'application/persistence/UsersRepository'
+import { User } from 'domain/entities/user.entity'
 
 /* 
 TypeOrmModule.forRoot({
@@ -34,7 +34,7 @@ TypeOrmModule.forRoot({
       ssl: false,
       password: 'alcbart12',
       database: 'users',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     JwtModule.register({
