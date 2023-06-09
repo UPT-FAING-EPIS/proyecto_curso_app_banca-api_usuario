@@ -17,6 +17,7 @@ import {
   ApiOkResponse,
   ApiBody,
   ApiBadRequestResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger'
 import { User } from 'domain/entities/user.entity'
 import { JwtAuthGuard } from 'infrastructure/auth/jwt-auth.guard'
@@ -48,6 +49,7 @@ export class UsersController {
     description: 'Se obtuvieron los datos de todos los usuarios',
   })
   @ApiBadRequestResponse({ description: 'Error al obtener usuarios' })
+  @ApiBearerAuth()
   @Get() // http://localhost/users -> GET
   findAll() {
     return this.userUseCases.getAllUsers()
@@ -55,10 +57,10 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Registrar usuario' })
   @ApiOkResponse({ description: 'Registra al usuario' })
+  @ApiBadRequestResponse({ description: 'Error al registrar usuario' })
   @ApiBody({
     type: CreateUserDto,
   })
-  @ApiBadRequestResponse({ description: 'Error al registrar usuario' })
   @Post() // http://localhost/users -> POST
   create(@Body() user: CreateUserDto) {
     return this.userUseCases.createUser(user)
@@ -67,13 +69,14 @@ export class UsersController {
   @UseGuards(JwtAuthGuard) // http://192.168.0.3:3000/users/:id -> PUT
   @ApiOperation({ summary: 'Actualizar usuario' })
   @ApiOkResponse({ description: 'Usuario actualizado' })
+  @ApiBadRequestResponse({ description: 'Error al actualizar usuario' })
   @ApiParam({
     name: 'id',
     type: Number,
     required: true,
     description: 'Id de usuario',
   })
-  @ApiBadRequestResponse({ description: 'Error al actualizar usuario' })
+  @ApiBearerAuth()
   @Put(':id') // http://localhost/users/:id -> PUT
   update(@Param('id', ParseIntPipe) id: number, @Body() user: UpdateUserDto) {
     return this.userUseCases.updateUser(id, user)
@@ -89,6 +92,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Bloquear usuario' })
   @ApiOkResponse({ description: 'Usuario bloqueado' })
   @ApiBadRequestResponse({ description: 'Error al bloquear usuario' })
+  @ApiBearerAuth()
   @Put(':id/block')
   blockUser(@Param('id') id: number): Promise<User> {
     return this.userUseCases.blockUser(id)

@@ -1,29 +1,31 @@
-import { IsString, IsEmail, IsNotEmpty, MinLength } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger'
+import { IsString, IsEmail, IsNotEmpty, MinLength } from 'class-validator'
 
 export class RegisterAuthDto {
-    
-    @IsNotEmpty()
-    @IsString()
-    name: string;
+  @ApiProperty({ description: 'Nombre del usuario', example: 'Juan' })
+  @IsNotEmpty()
+  @IsString()
+  name: string
 
-    @IsNotEmpty()
-    @IsString()
-    lastname: string;
+  @ApiProperty({ description: 'Apellido del usuario', example: 'Perez' })
+  @IsNotEmpty()
+  @IsString()
+  lastname: string
 
-    @IsNotEmpty()
-    @IsString()
-    @IsEmail({}, { message: 'El email no es valido' })
-    email: string;
+  @ApiProperty({ description: 'Email del usuario', example: 'jperez@mail.com' })
+  @IsNotEmpty()
+  @IsString()
+  @IsEmail({}, { message: 'El email no es válido' })
+  email: string
 
-    @IsNotEmpty()
-    @IsString()
-    phone: string;
+  @ApiProperty({ description: 'Teléfono del usuario', example: '123456' })
+  @IsNotEmpty()
+  @IsString()
+  phone: string
 
-    @IsNotEmpty()
-    @IsString()
-    @MinLength(6, { message: 'La contraseña debe tener minimo 6 caracteres' })
-    password: string;
-    
-    //rolesIds: string[];
-
+  @ApiProperty({ description: 'Contraseña del usuario', example: '123456' })
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(6, { message: 'La contraseña debe tener minimo 6 caracteres' })
+  password: string
 }

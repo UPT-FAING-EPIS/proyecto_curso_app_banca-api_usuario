@@ -9,6 +9,8 @@ import { jwtConstants } from 'infrastructure/auth/jwt.constants'
 import { JwtStrategy } from 'infrastructure/auth/jwt.strategy'
 import { UsersRepository } from 'application/persistence/UsersRepository'
 import { User } from 'domain/entities/user.entity'
+import { AuthUseCases } from 'application/use-cases/AuthUseCases'
+import { AuthController } from 'presentation/controllers/auth.controller'
 
 /* 
 TypeOrmModule.forRoot({
@@ -39,10 +41,10 @@ TypeOrmModule.forRoot({
     }),
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '12h' },
+      signOptions: { expiresIn: '5m' },
     }),
   ],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersUseCases, JwtStrategy, UsersRepository],
+  controllers: [AppController, UsersController, AuthController],
+  providers: [AppService, UsersUseCases, AuthUseCases, JwtStrategy, UsersRepository],
 })
 export class AppModule {}

@@ -4,11 +4,13 @@ import {
   ApiBody,
   ApiOkResponse,
   ApiOperation,
+  ApiTags,
 } from '@nestjs/swagger'
 import { RegisterAuthDto } from 'application/dtos/register-auth.dto'
 import { LoginAuthDto } from 'application/dtos/login-auth.dto'
 import { AuthUseCases } from 'application/use-cases/AuthUseCases'
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authUseCases: AuthUseCases) {}

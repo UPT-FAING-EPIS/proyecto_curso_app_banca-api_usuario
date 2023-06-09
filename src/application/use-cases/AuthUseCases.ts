@@ -15,8 +15,8 @@ import { UsersRepository } from 'application/persistence/UsersRepository'
 @Injectable()
 export class AuthUseCases {
   constructor(
-    @InjectRepository(User) private usersRepository: UsersRepository,
-    private jwtService: JwtService,
+    private readonly usersRepository: UsersRepository,
+    private jwtService: JwtService
   ) {}
 
   async register(user: RegisterAuthDto) {
