@@ -1,12 +1,20 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { UsersController } from 'presentation/controllers/users.controller'
+import { UsersUseCases } from 'application/use-cases/UsersUseCases'
+import { JwtModule } from '@nestjs/jwt'
+import { jwtConstants } from 'infrastructure/auth/jwt.constants'
+import { JwtStrategy } from 'infrastructure/auth/jwt.strategy'
+import { UsersRepository } from 'application/persistence/UsersRepository'
+import { User } from 'domain/entities/user.entity'
+import { AuthUseCases } from 'application/use-cases/AuthUseCases'
+import { AuthController } from 'presentation/controllers/auth.controller'
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([User]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'api-usuario-db-ins.c5odpn9hksgv.us-east-1.rds.amazonaws.com',
@@ -15,13 +23,15 @@ import { AuthModule } from './auth/auth.module';
       ssl: false,
       password: 'upt2023-API',
       database: 'Api_Usuario',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    UsersModule,
-    AuthModule
-],
-  controllers: [AppController],
-  providers: [AppService],
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '5m' },
+    }),
+  ],
+  controllers: [AppController, UsersController, AuthController],
+  providers: [AppService, UsersUseCases, AuthUseCases, JwtStrategy, UsersRepository],
 })
 export class AppModule {}
