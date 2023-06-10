@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { Module, Query } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -11,9 +11,14 @@ import { UsersRepository } from 'application/persistence/UsersRepository'
 import { User } from 'domain/entities/user.entity'
 import { AuthUseCases } from 'application/use-cases/AuthUseCases'
 import { AuthController } from 'presentation/controllers/auth.controller'
+import { CqrsModule } from '@nestjs/cqrs'
+import { CommandHandlers } from 'application/commands/handlers'
+import { QueryHandlers } from 'application/queries/handlers'
+import { UseCases } from 'application/use-cases'
 
 @Module({
   imports: [
+    CqrsModule,
     TypeOrmModule.forFeature([User]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -28,10 +33,17 @@ import { AuthController } from 'presentation/controllers/auth.controller'
     }),
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '5m' },
+      signOptions: { expiresIn: '5h' },
     }),
   ],
   controllers: [AppController, UsersController, AuthController],
-  providers: [AppService, UsersUseCases, AuthUseCases, JwtStrategy, UsersRepository],
+  providers: [
+    AppService,
+    JwtStrategy,
+    UsersRepository,
+    ...UseCases,
+    ...CommandHandlers,
+    ...QueryHandlers,
+  ],
 })
 export class AppModule {}
