@@ -12,30 +12,17 @@ import { User } from 'domain/entities/user.entity'
 import { AuthUseCases } from 'application/use-cases/AuthUseCases'
 import { AuthController } from 'presentation/controllers/auth.controller'
 
-/* 
-TypeOrmModule.forRoot({
-  type: 'mysql',
-  host: 'api-usuario-db-ins.c5odpn9hksgv.us-east-1.rds.amazonaws.com',
-  port: 3306,
-  username: 'su',
-  ssl: false,
-  password: 'upt2023-API',
-  database: 'Api_Usuario',
-  synchronize: true,
-}),
-*/
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'api-usuario-db-ins.c5odpn9hksgv.us-east-1.rds.amazonaws.com',
       port: 3306,
-      username: 'root',
+      username: 'su',
       ssl: false,
-      password: 'alcbart12',
-      database: 'users',
+      password: 'upt2023-API',
+      database: 'Api_Usuario',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
