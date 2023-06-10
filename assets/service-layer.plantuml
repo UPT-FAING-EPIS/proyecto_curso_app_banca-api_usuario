@@ -1,0 +1,58 @@
+@startuml
+class User {
+    +id: number
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +image: string
+    +password: string
+    +notification_token: string
+    +is_active: boolean
+    +created_at: Date
+    +updated_at: Date
+    +hashPassword(): Promise<void>
+}
+class UsersUseCases {
+    -logger: Logger
+    -commandBus: CommandBus<ICommand>
+    -queryBus: QueryBus<IQuery>
+    +updateUser(id: number, user: UpdateUserDto): Promise<User>
+    +createUser(user: CreateUserDto): Promise<User>
+    +getAllUsers(): Promise<User[]>
+    +blockUser(id: number): Promise<User>
+}
+class UsersController {
+    -userUseCases: UsersUseCases
+    +getAllUsers(): Promise<User[]>
+    +findAll(): Promise<User[]>
+    +create(user: CreateUserDto): Promise<User>
+    +update(id: number, user: UpdateUserDto): Promise<User>
+    +blockUser(id: number): Promise<User>
+}
+class AuthUseCases {
+    -logger: Logger
+    -commandBus: CommandBus<ICommand>
+    +register(user: RegisterAuthDto): Promise<any>
+    +login(loginData: LoginAuthDto): Promise<any>
+}
+class AuthController {
+    -authUseCases: AuthUseCases
+    +register(user: RegisterAuthDto): Promise<any>
+    +login(loginData: LoginAuthDto): Promise<any>
+}
+UsersUseCases --> "1" UpdateUserDto
+UsersUseCases --> "1" User
+UsersUseCases --> "1" CreateUserDto
+UsersUseCases --> "*" User
+UsersController --> "1" UsersUseCases
+UsersController --> "*" User
+UsersController --> "1" CreateUserDto
+UsersController --> "1" User
+UsersController --> "1" UpdateUserDto
+AuthUseCases --> "1" RegisterAuthDto
+AuthUseCases --> "1" LoginAuthDto
+AuthController --> "1" AuthUseCases
+AuthController --> "1" RegisterAuthDto
+AuthController --> "1" LoginAuthDto
+@enduml

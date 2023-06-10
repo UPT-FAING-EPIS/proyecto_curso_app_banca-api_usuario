@@ -1,0 +1,24 @@
+@startuml
+class GetAllUsersQuery
+class User {
+    +id: number
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +image: string
+    +password: string
+    +notification_token: string
+    +is_active: boolean
+    +created_at: Date
+    +updated_at: Date
+    +hashPassword(): Promise<void>
+}
+class GetAllUsersQueryHandler implements IQueryHandler {
+    -usersRepository: UsersRepository
+    +execute(query: GetAllUsersQuery): Promise<User[]>
+}
+
+GetAllUsersQueryHandler --> "1" GetAllUsersQuery
+GetAllUsersQueryHandler --> "1" User
+@enduml

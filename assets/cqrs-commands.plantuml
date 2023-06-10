@@ -1,0 +1,84 @@
+@startuml
+class BlockUserCommand {
+    +id: number
+}
+class CreateUserDto {
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +password: string
+    +image?: string
+    +notification_token?: string
+}
+class CreateUserCommand {
+    +user: CreateUserDto
+}
+class UpdateUserDto {
+    +name?: string
+    +lastname?: string
+    +phone?: string
+    +image?: string
+    +notification_token?: string
+}
+class UpdateUserCommand {
+    +id: number
+    +user: UpdateUserDto
+}
+
+class RegisterAuthDto {
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +password: string
+}
+class LoginAuthDto {
+    +email: string
+    +password: string
+}
+class RegisterAuthCommand {
+    +userAuth: RegisterAuthDto
+}
+class LoginAuthCommand {
+    +loginAuth: LoginAuthDto
+}
+class BlockUserCommandHandler implements ICommandHandler {
+    -usersRepository: UsersRepository
+    +execute(command: BlockUserCommand): Promise<User & UpdateUserDto>
+}
+class CreateUserCommandHandler implements ICommandHandler {
+    -usersRepository: UsersRepository
+    +execute(command: CreateUserCommand): Promise<User>
+}
+class LoginAuthCommandHandler implements ICommandHandler {
+    -usersRepository: UsersRepository
+    -jwtService: JwtService
+    +execute(command: LoginAuthCommand): Promise<{ user: User; token: string; }>
+}
+class RegisterAuthCommandHandler implements ICommandHandler {
+    -usersRepository: UsersRepository
+    -jwtService: JwtService
+    +execute(command: RegisterAuthCommand): Promise<{ user: User; token: string; }>
+}
+class UpdateUserCommandHandler implements ICommandHandler {
+    -usersRepository: UsersRepository
+    +execute(command: UpdateUserCommand): Promise<User & UpdateUserDto>
+}
+CreateUserCommand --> "1" CreateUserDto
+UpdateUserCommand --> "1" UpdateUserDto
+RegisterAuthCommand --> "1" RegisterAuthDto
+LoginAuthCommand --> "1" LoginAuthDto
+BlockUserCommandHandler --> "1" BlockUserCommand
+BlockUserCommandHandler --> "1" User
+BlockUserCommandHandler --> "1" UpdateUserDto
+CreateUserCommandHandler --> "1" CreateUserCommand
+CreateUserCommandHandler --> "1" User
+LoginAuthCommandHandler --> "1" LoginAuthCommand
+LoginAuthCommandHandler --> "1" User
+RegisterAuthCommandHandler --> "1" RegisterAuthCommand
+RegisterAuthCommandHandler --> "1" User
+UpdateUserCommandHandler --> "1" UpdateUserCommand
+UpdateUserCommandHandler --> "1" User
+UpdateUserCommandHandler --> "1" UpdateUserDto
+@enduml

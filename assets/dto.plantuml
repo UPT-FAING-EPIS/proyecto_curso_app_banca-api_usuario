@@ -1,0 +1,29 @@
+@startuml
+class CreateUserDto {
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +password: string
+    +image?: string
+    +notification_token?: string
+}
+class UpdateUserDto {
+    +name?: string
+    +lastname?: string
+    +phone?: string
+    +image?: string
+    +notification_token?: string
+}
+class RegisterAuthDto {
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +password: string
+}
+class LoginAuthDto {
+    +email: string
+    +password: string
+}
+@enduml
