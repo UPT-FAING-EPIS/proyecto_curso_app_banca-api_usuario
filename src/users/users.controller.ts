@@ -10,6 +10,7 @@ import {
   } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('users')
 @Controller('users')
@@ -39,5 +40,23 @@ export class UsersController {
     @Put(':id') // http://localhost/users/:id -> PUT
     update(@Param('id', ParseIntPipe) id: number, @Body() user: UpdateUserDto) {
         return this.usersService.update(id, user);
+    }
+
+    @Post('upload/:id') 
+    @UseInterceptors(FileInterceptor('file'))
+    updateWithImage(
+        @UploadedFile(
+            new ParseFilePipe({
+                validators: [
+                    new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 10}),
+                    new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }),
+                ],
+            }),
+        ) file: Express.Multer.File,
+        @Param('id', ParseIntPipe) id: number, 
+        @Body() user: UpdateUserDto
+    ) {
+        //console.log(file);
+        return this.usersService.updateWithImage(file, id, user);
     }
 }

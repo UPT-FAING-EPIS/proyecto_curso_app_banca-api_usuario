@@ -6,12 +6,12 @@ export class UpdateUserDto {
     @IsString()
     name?: string;
 
-    @IsNotEmpty()
+    //@IsNotEmpty()
     @IsString()
     lastname?: string;
 
-    @IsNotEmpty()
-    @IsString()
+    //@IsNotEmpty()
+    //@IsString()
     phone?: string;
     
     image?: string;
