@@ -8,9 +8,12 @@ import {
     ApiOkResponse,
     ApiNotFoundResponse,
   } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { JwtRolesGuard } from 'src/auth/jwt/jwt-roles.guard';
+import { HasRoles } from 'src/auth/jwt/has-roles';
+import { JwtRole } from 'src/auth/jwt/jwt-role';
 
 @ApiTags('users')
 @Controller('users')
@@ -23,7 +26,8 @@ export class UsersController {
     // PUT ' PATCH -> ACTUALIZAR
     // DELETE ' => BORRAR
 
-    @UseGuards(JwtAuthGuard)
+    @HasRoles(JwtRole.ADMIN)
+    @UseGuards(JwtAuthGuard, JwtRolesGuard)
     @Get() // http://localhost/users -> GET
     findAll(){
         return this.usersService.findAll();
@@ -36,13 +40,16 @@ export class UsersController {
         return this.usersService.create(user);
     }
 
-    @UseGuards(JwtAuthGuard)  // http://192.168.0.3:3000/users/:id -> PUT
-    @Put(':id') // http://localhost/users/:id -> PUT
+    @HasRoles(JwtRole.CLIENT)
+    @UseGuards(JwtAuthGuard, JwtRolesGuard)  
+    @Put(':id') // http://localhost/users/:id -> PUT  ||  http://192.168.0.3:3000/users/:id -> PUT
     update(@Param('id', ParseIntPipe) id: number, @Body() user: UpdateUserDto) {
         return this.usersService.update(id, user);
     }
 
-    @Post('upload/:id') 
+    @HasRoles(JwtRole.CLIENT)
+    @UseGuards(JwtAuthGuard, JwtRolesGuard)
+    @Post('upload/:id') // http://localhost/users/upload/:id -> POST
     @UseInterceptors(FileInterceptor('file'))
     updateWithImage(
         @UploadedFile(
