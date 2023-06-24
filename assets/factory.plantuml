@@ -1,0 +1,31 @@
+@startuml
+class User {
+    +id: number
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +image: string
+    +password: string
+    +notification_token: string
+    +is_active: boolean
+    +created_at: Date
+    +updated_at: Date
+    +hashPassword(): Promise<void>
+}
+class Administrator extends User
+class Client extends User
+class Employee extends User
+interface IUserFactory {
+    +createClient(): User
+    +createEmployee(): User
+    +createAdministrator(): User
+}
+class BankUserFactory implements IUserFactory {
+    +createClient(): User
+    +createEmployee(): User
+    +createAdministrator(): User
+}
+IUserFactory --> "1" User
+BankUserFactory --> "1" User
+@enduml

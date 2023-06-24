@@ -1,0 +1,35 @@
+@startuml
+class User {
+    +id: number
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +image: string
+    +password: string
+    +notification_token: string
+    +is_active: boolean
+    +created_at: Date
+    +updated_at: Date
+    +hashPassword(): Promise<void>
+}
+interface ValidationStrategy {
+    +validate(user: User): boolean
+}
+class EmailValidationStrategy implements ValidationStrategy {
+    +validate(user: User): boolean
+}
+class PhoneValidationStrategy implements ValidationStrategy {
+    +validate(user: User): boolean
+}
+class UserValidator {
+    -validationStrategy: ValidationStrategy
+    +setValidationStrategy(validationStrategy: ValidationStrategy): void
+    +validate(user: User): boolean
+}
+ValidationStrategy --> "1" User
+EmailValidationStrategy --> "1" User
+PhoneValidationStrategy --> "1" User
+UserValidator --> "1" ValidationStrategy
+UserValidator --> "1" User
+@enduml

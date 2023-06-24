@@ -1,5 +1,15 @@
 # Patrones de diseño implementados
 
+## Introducción
+
+El presente trabajo tiene como objetivo analizar la implementación de diferentes patrones de diseño en una API de usuarios de una institución bancaria. Los patrones de diseño seleccionados para este proyecto son DTO, CQRS, Repository, Service Layer, Abstract Factory y Strategy. Estos patrones son ampliamente utilizados en el desarrollo de aplicaciones robustas, escalables y mantenibles, y proporcionan una estructura sólida para la organización y gestión de la lógica de negocio.
+
+## Objetivos
+
+* Explorar la importancia de utilizar patrones de diseño en el desarrollo de una API de usuarios en el contexto de una institución bancaria.
+* Analizar y comprender cada uno de los patrones de diseño seleccionados y su aplicabilidad en el contexto del proyecto.
+* Evaluar los beneficios y desafíos asociados con la implementación de cada patrón de diseño en el proyecto.
+
 ## DTO (Data Transfer Object)
 
 El patrón DTO (Data Transfer Object) se utiliza para transferir datos entre diferentes componentes de un sistema, especialmente cuando se necesita pasar datos entre capas o servicios. Los DTOs son objetos simples que contienen campos para almacenar datos y no tienen lógica adicional. Su propósito principal es proporcionar una estructura clara y eficiente para transportar datos sin exponer la implementación interna del sistema.
@@ -42,9 +52,20 @@ El patrón Service Layer, también conocido como Capa de Servicios, es un patró
 
 ![Alt text](diagram-service-layer.png)
 
-## Factory
+## Abstract Factory
 
+El patrón Abstract Factory proporciona una interfaz para crear familias de objetos relacionados sin especificar sus clases concretas. Permite encapsular la creación de objetos y garantizar que los objetos creados sean compatibles y coherentes entre sí. Esto promueve la flexibilidad y la extensibilidad al permitir la fácil incorporación de nuevas variantes de objetos sin modificar el código existente. El patrón Abstract Factory es especialmente útil cuando se necesita crear conjuntos de objetos relacionados que siguen un tema o variante común.
 
+![Alt text](diagram-factory.png)
 
 ## Strategy
 
+El patrón Strategy define una familia de algoritmos intercambiables y los encapsula en clases separadas, lo que permite que los algoritmos varíen independientemente de los clientes que los utilizan. Proporciona una forma de cambiar dinámicamente el comportamiento de un objeto en tiempo de ejecución, seleccionando una estrategia adecuada en función de las necesidades o condiciones específicas. El patrón Strategy ayuda a reducir la duplicación de código y mejora la mantenibilidad al separar las responsabilidades de los algoritmos y permitir su reutilización en diferentes contextos.
+
+![Alt text](diagram-strategy.png)
+
+## Conclusiones
+
+La implementación de patrones de diseño en una API de usuarios de una banca ofrece numerosos beneficios. El uso de DTOs permite una representación estructurada y segura de los datos que se intercambian entre los diferentes componentes del sistema. La adopción del patrón CQRS proporciona una separación clara entre las operaciones de lectura y escritura, lo que facilita la escalabilidad y mejora el rendimiento. El patrón Repository abstrae la persistencia de datos y facilita la gestión de las operaciones de acceso a la base de datos. La aplicación del patrón Service Layer promueve la cohesión y reutilización del código de negocio. La utilización de Abstract Factory permite la creación de familias de objetos relacionados de forma coherente y extensible. Por último, el patrón Strategy brinda flexibilidad al permitir la selección dinámica de algoritmos en tiempo de ejecución.
+
+En resumen, la implementación de estos patrones de diseño en la API de usuarios de una banca mejora la modularidad, la flexibilidad y la mantenibilidad del sistema, permitiendo un desarrollo más eficiente y una adaptación más fácil a los cambios futuros.
