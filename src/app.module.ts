@@ -1,15 +1,13 @@
-import { Module, Query } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { UsersController } from 'presentation/controllers/users.controller'
-import { UsersUseCases } from 'application/use-cases/UsersUseCases'
 import { JwtModule } from '@nestjs/jwt'
 import { jwtConstants } from 'infrastructure/auth/jwt.constants'
 import { JwtStrategy } from 'infrastructure/auth/jwt.strategy'
 import { UsersRepository } from 'application/persistence/UsersRepository'
 import { User } from 'domain/entities/user.entity'
-import { AuthUseCases } from 'application/use-cases/AuthUseCases'
 import { AuthController } from 'presentation/controllers/auth.controller'
 import { CqrsModule } from '@nestjs/cqrs'
 import { CommandHandlers } from 'application/commands/handlers'
@@ -23,11 +21,11 @@ import { HealthModule } from './health/health.module';
     TypeOrmModule.forFeature([User]),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'db1.c5odpn9hksgv.us-east-1.rds.amazonaws.com',
+      host: 'localhost',
       port: 3306,
-      username: 'admin',
+      username: 'root',
       ssl: false,
-      password: 'UPT2023*',
+      password: 'alcbart12',
       database: 'users',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
