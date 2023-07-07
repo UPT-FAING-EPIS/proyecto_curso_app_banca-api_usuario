@@ -13,7 +13,7 @@ import { CqrsModule } from '@nestjs/cqrs'
 import { CommandHandlers } from 'application/commands/handlers'
 import { QueryHandlers } from 'application/queries/handlers'
 import { UseCases } from 'application/use-cases'
-import { HealthModule } from './health/health.module';
+import { HealthModule } from './infrastructure/health/health.module';
 
 @Module({
   imports: [
