@@ -1,0 +1,38 @@
+@startuml
+class User {
+    +id: number
+    +name: string
+    +lastname: string
+    +email: string
+    +phone: string
+    +image: string
+    +password: string
+    +notification_token: string
+    +is_active: boolean
+    +created_at: Date
+    +updated_at: Date
+    +hashPassword(): Promise<void>
+}
+interface IRepository<T> {
+    +getById(id: number): Promise<T>
+    +getAll(): Promise<T[]>
+    +create(entity: T): Promise<T>
+    +update(id: number, entity: T): Promise<T>
+}
+interface IUsersRepository<User> extends IRepository {
+    +findByEmail(email: string): Promise<User>
+    +findByPhone(phone: string): Promise<User>
+}
+class UsersRepository implements IUsersRepository {
+    -db: Repository<User>
+    +getById(id: number): Promise<User>
+    +getAll(): Promise<User[]>
+    +create(user: CreateUserDto): Promise<User>
+    +update(id: number, user: UpdateUserDto): Promise<User & UpdateUserDto>
+    +findByEmail(email: string): Promise<User>
+    +findByPhone(phone: string): Promise<User>
+}
+IUsersRepository --> "1" User
+UsersRepository --> "1" User
+UsersRepository --> "*" User
+@enduml
