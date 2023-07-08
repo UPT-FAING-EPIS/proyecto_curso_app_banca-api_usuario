@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
+import { IsString, MinLength } from 'class-validator'
 
 export class CreateUserDto {
   @ApiProperty({ example: 'Juan', description: 'Nombre del usuario' })
@@ -21,4 +22,9 @@ export class CreateUserDto {
 
   @ApiProperty({ description: 'Token de notificacion del usuario' })
   notification_token?: string
+
+  @ApiProperty({ description: 'Roles del usuario', example: ['ADMIN'] })
+  @IsString({ each: true })
+  @MinLength(5, { each: true })
+  role: string[]
 }

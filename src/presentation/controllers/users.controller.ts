@@ -7,6 +7,11 @@ import {
   Post,
   Body,
   ParseIntPipe,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
 } from '@nestjs/common'
 import { UsersUseCases } from 'application/use-cases/UsersUseCases'
 
@@ -23,6 +28,10 @@ import { User } from 'domain/entities/user.entity'
 import { JwtAuthGuard } from 'infrastructure/auth/jwt-auth.guard'
 import { CreateUserDto } from 'application/dtos/create-user.dto'
 import { UpdateUserDto } from 'application/dtos/update-user.dto'
+import { HasRoles } from 'infrastructure/auth/has-roles'
+import { JwtRole } from 'infrastructure/auth/jwt-role'
+import { JwtRolesGuard } from 'infrastructure/auth/jwt-roles.guard'
+import { FileInterceptor } from '@nestjs/platform-express'
 
 @ApiTags('users')
 @Controller('users')
@@ -80,6 +89,26 @@ export class UsersController {
   @Put(':id') // http://localhost/users/:id -> PUT
   update(@Param('id', ParseIntPipe) id: number, @Body() user: UpdateUserDto) {
     return this.userUseCases.updateUser(id, user)
+  }
+
+  @HasRoles(JwtRole.CLIENT)
+  @UseGuards(JwtAuthGuard, JwtRolesGuard)
+  @Post('upload/:id') // http://localhost/users/upload/:id -> POST
+  @UseInterceptors(FileInterceptor('file'))
+  updateWithImage(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 10 }),
+          new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }),
+        ],
+      })
+    )
+    file: Express.Multer.File,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() user: UpdateUserDto
+  ) {
+    return this.userUseCases.updateUserWithImage(file, id, user)
   }
 
   @UseGuards(JwtAuthGuard)

@@ -17,6 +17,9 @@ export class UpdateUserDto {
   @IsString()
   phone?: string
 
+  @ApiProperty({ description: 'Imagen del usuario', example: 'https://mi-imagen.com' })
   image?: string
+
+  @ApiProperty({ description: 'Token de notificación del usuario', example: '123456' })
   notification_token?: string
 }

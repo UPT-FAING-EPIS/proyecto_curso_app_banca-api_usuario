@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
 import { BlockUserCommand } from 'application/commands/block-user.command'
 import { CreateUserCommand } from 'application/commands/create-user.command'
+import { UpdateUserWithImageCommand } from 'application/commands/update-user-with-image.command'
 import { UpdateUserCommand } from 'application/commands/update-user.command'
 import { CreateUserDto } from 'application/dtos/create-user.dto'
 import { UpdateUserDto } from 'application/dtos/update-user.dto'
@@ -13,6 +14,11 @@ export class UsersUseCases {
   private readonly logger = new Logger(UsersUseCases.name)
 
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+
+  async updateUserWithImage(file: Express.Multer.File, id: number, user: UpdateUserDto): Promise<User> {
+    this.logger.log('Update a user')
+    return this.commandBus.execute(new UpdateUserWithImageCommand(file, id, user))
+  }
 
   async updateUser(id: number, user: UpdateUserDto): Promise<User> {
     this.logger.log('Update a user')

@@ -1,5 +1,5 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { UsersRepository } from 'application/persistence/UsersRepository'
+import { UsersRepository } from 'application/persistence/repos/UsersRepository'
 import { JwtService } from '@nestjs/jwt'
 import { LoginAuthCommand } from 'application/commands/login-auth.command'
 import { ForbiddenException, NotFoundException } from '@nestjs/common'
@@ -26,7 +26,9 @@ export class LoginAuthCommandHandler
       throw new ForbiddenException('La contraseña es incorrecta')
     }
 
-    const payload = { id: userFound.id, name: userFound.name }
+    const rolesIds = userFound.roles.map((role) => role.id) // ['CLIENT','ADMIN']
+
+    const payload = { id: userFound.id, name: userFound.name, roles: rolesIds }
     const token = this.jwtService.sign(payload)
     const data = {
       user: userFound,

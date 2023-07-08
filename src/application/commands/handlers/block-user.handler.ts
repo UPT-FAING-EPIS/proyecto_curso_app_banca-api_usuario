@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common'
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { UsersRepository } from 'application/persistence/UsersRepository'
+import { UsersRepository } from 'application/persistence/repos/UsersRepository'
 import { BlockUserCommand } from 'application/commands/block-user.command'
 
 @CommandHandler(BlockUserCommand)

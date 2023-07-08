@@ -3,9 +3,14 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { AppModule } from './app.module'
 import { ValidationPipe } from '@nestjs/common'
 
+import appConfig from 'infrastructure/config/app.config'
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  app.enableCors()
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: false }))
+
+  const port = appConfig.port
 
   const config = new DocumentBuilder()
     .setTitle('API Usuario')
@@ -17,6 +22,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api', app, document)
 
-  await app.listen(4242)
+  await app.listen(port)
 }
 bootstrap()

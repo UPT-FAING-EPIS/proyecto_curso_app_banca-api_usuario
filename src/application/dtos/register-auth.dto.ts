@@ -28,4 +28,9 @@ export class RegisterAuthDto {
   @IsString()
   @MinLength(6, { message: 'La contraseña debe tener minimo 6 caracteres' })
   password: string
+
+  @ApiProperty({ description: 'Roles del usuario', example: ['ADMIN'] })
+  @IsString({ each: true })
+  @MinLength(1, { message: 'Debe tener al menos un rol', each: true })
+  rolesIds?: string[]
 }

@@ -1,5 +1,5 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { UsersRepository } from 'application/persistence/UsersRepository'
+import { UsersRepository } from 'application/persistence/repos/UsersRepository'
 import { CreateUserCommand } from 'application/commands/create-user.command'
 
 @CommandHandler(CreateUserCommand)

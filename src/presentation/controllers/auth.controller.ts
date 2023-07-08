@@ -1,4 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+  Res,
+} from '@nestjs/common'
 import {
   ApiBadRequestResponse,
   ApiBody,
@@ -22,7 +29,7 @@ export class AuthController {
     type: RegisterAuthDto,
   })
   @Post('register') // http://localhost/auth/register -> POST
-  register(@Body() user: RegisterAuthDto) {
+  register(@Body() user: RegisterAuthDto, @Res() res: Response) {
     return this.authUseCases.register(user)
   }
 
