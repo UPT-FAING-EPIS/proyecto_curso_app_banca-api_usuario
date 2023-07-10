@@ -1,6 +1,6 @@
-import { NotFoundException } from '@nestjs/common'
+import { HttpException } from '@nestjs/common'
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { UsersRepository } from 'application/persistence/UsersRepository'
+import { UsersRepository } from 'application/persistence/repos/UsersRepository'
 import { BlockUserCommand } from 'application/commands/block-user.command'
 
 @CommandHandler(BlockUserCommand)
@@ -12,11 +12,16 @@ export class BlockUserCommandHandler
   async execute(command: BlockUserCommand) {
     const user = await this.usersRepository.getById(command.id)
 
-    if (!user) throw new NotFoundException('El usuario no existe')
-    if (!user.is_active) throw new Error('El usuario ya se encuentra bloqueado')
+    if (!user) throw new HttpException('El usuario no existe', 404)
+    if (!user.is_active)
+      throw new HttpException('El usuario ya se encuentra bloqueado', 409)
 
     user.is_active = false
 
-    return await this.usersRepository.update(command.id, user)
+    try {
+      return await this.usersRepository.update(command.id, user)
+    } catch (error) {
+      throw new HttpException(error.message, 409)
+    }
   }
 }

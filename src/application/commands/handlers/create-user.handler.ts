@@ -1,6 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { UsersRepository } from 'application/persistence/UsersRepository'
+import { UsersRepository } from 'application/persistence/repos/UsersRepository'
 import { CreateUserCommand } from 'application/commands/create-user.command'
+import { HttpException } from '@nestjs/common'
 
 @CommandHandler(CreateUserCommand)
 export class CreateUserCommandHandler
@@ -9,6 +10,10 @@ export class CreateUserCommandHandler
   constructor(private readonly usersRepository: UsersRepository) {}
 
   async execute(command: CreateUserCommand) {
-    return await this.usersRepository.create(command.user)
+    try {
+      return await this.usersRepository.saveCreated(command.user)
+    } catch (error) {
+      throw new HttpException(error.message, 409)
+    }
   }
 }
