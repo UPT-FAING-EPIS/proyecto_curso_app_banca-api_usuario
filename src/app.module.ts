@@ -15,6 +15,8 @@ import appConfig from 'infrastructure/config/app.config'
 import { Controllers } from 'presentation/controllers'
 import { Repositories } from 'application/persistence/repos'
 import { Role } from 'domain/entities/role.entity'
+import { LoggerModule } from 'nestjs-pino'
+import { DatadogTraceModule } from 'nestjs-ddtrace'
 
 const dbConfig = appConfig.db
 
@@ -34,6 +36,18 @@ const dbConfig = appConfig.db
       signOptions: { expiresIn: '5h' },
     }),
     HealthModule,
+    LoggerModule.forRoot({
+      pinoHttp: {
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            colorize: true,
+            singleLine: true,
+          },
+        },
+      },
+    }),
+    DatadogTraceModule.forRoot(),
   ],
   controllers: [AppController, ...Controllers],
   providers: [
