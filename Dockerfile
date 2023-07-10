@@ -10,6 +10,8 @@ COPY --chown=node:node package*.json ./
 
 RUN npm ci
 
+EXPOSE 3000
+
 COPY --chown=node:node . .
 
 USER node
@@ -33,6 +35,8 @@ RUN npm run build
 ENV NODE_ENV production
 
 RUN npm ci --only=production && npm cache clean --force
+
+EXPOSE 80
 
 USER node
 

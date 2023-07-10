@@ -1,4 +1,5 @@
 const isEnvProduction = process.env.NODE_ENV === 'production'
+const isEnvStaging = process.env.NODE_ENV === 'staging'
 
 export default isEnvProduction
   ? {
@@ -11,13 +12,23 @@ export default isEnvProduction
         database: 'users',
       },
     }
-  : {
+  : isEnvStaging ? {
       port: 3000,
       db: {
-        host: 'localhost',
+        host: '192.168.18.5',
         port: 3306,
         username: 'root',
         password: 'alcbart12',
         database: 'users',
       },
     }
+  : {
+    port: 3000,
+    db: {
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'alcbart12',
+      database: 'users',
+    },
+  }
