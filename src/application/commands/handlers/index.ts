@@ -4,6 +4,7 @@ import { CreateUserCommandHandler } from './create-user.handler'
 import { LoginAuthCommandHandler } from './login-auth.handler'
 import { RegisterAuthCommandHandler } from './register-auth.handler'
 import { UpdateUserCommandHandler } from './update-user.handler'
+import { UpdateUserWithImageCommandHandler } from './update-user-with-image.handler'
 
 export const CommandHandlers = [
   CreateUserCommandHandler,
@@ -11,5 +12,6 @@ export const CommandHandlers = [
   BlockUserCommandHandler,
   LoginAuthCommandHandler,
   RegisterAuthCommandHandler,
-  CreateRoleCommandHandler
+  CreateRoleCommandHandler,
+  UpdateUserWithImageCommandHandler,
 ]

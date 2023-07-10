@@ -8,37 +8,56 @@ import { IUsersRepository } from './IUsersRepository'
 
 @Injectable()
 export class UsersRepository implements IUsersRepository<User> {
-  constructor(@InjectRepository(User) private usersDb: Repository<User>) {}
-  
+  constructor(@InjectRepository(User) private db: Repository<User>) {}
+
   async getById(id: number): Promise<User> {
-    return this.usersDb.findOneBy({ id: id })
+    return this.db.findOneBy({ id: id })
   }
-  
+
   async getAll(): Promise<User[]> {
-    return this.usersDb.find()
+    return this.db.find()
   }
-  
-  create(user: User): Promise<User> {
-    const newUser = this.usersDb.create(user)
-    return this.usersDb.save(newUser)
+
+  saveCreated(user: User): Promise<User> {
+    const newUser = this.db.create(user)
+    return this.db.save(newUser)
+  }
+
+  create(user: User): User {
+    return this.db.create(user)
+  }
+
+  async save(user: User): Promise<User> {
+    return this.db.save(user)
   }
 
   async update(id: number, user: UpdateUserDto) {
-    const userFound = await this.usersDb.findOneBy({ id: id })
+    const userFound = await this.db.findOneBy({ id: id })
 
     if (!userFound) {
       throw new Error('User not found')
     }
 
     const updatedUser = Object.assign(userFound, user)
-    return this.usersDb.save(updatedUser)
+    return this.db.save(updatedUser)
+  }
+
+  async updateImageProfile(id: number, image: string) {
+    const userFound = await this.db.findOneBy({ id: id })
+
+    if (!userFound) {
+      throw new Error('User not found')
+    }
+
+    const updatedUser = Object.assign(userFound, { image })
+    return this.db.save(updatedUser)
   }
 
   async findByEmail(email: string) {
-    return this.usersDb.findOne({ where: { email }, relations: ['roles'] })
+    return this.db.findOne({ where: { email }, relations: ['roles'] })
   }
 
   async findByPhone(phone: string) {
-    return this.usersDb.findOneBy({ phone })
+    return this.db.findOneBy({ phone })
   }
 }

@@ -38,21 +38,13 @@ import { FileInterceptor } from '@nestjs/platform-express'
 export class UsersController {
   constructor(private readonly userUseCases: UsersUseCases) {}
 
-  @Get()
-  @ApiOperation({ summary: 'Obtener todos los usuarios' })
-  @ApiOkResponse({
-    description: 'Se obtuvieron los datos de todos los usuarios',
-  })
-  getAllUsers(): Promise<User[]> {
-    return this.userUseCases.getAllUsers()
-  }
-
   // GET -> OBTENER
   // POST -> CREAR
   // PUT & PATCH -> ACTUALIZAR
   // DELETE -> BORRAR
 
-  @UseGuards(JwtAuthGuard)
+  @HasRoles(JwtRole.ADMIN)
+  @UseGuards(JwtAuthGuard, JwtRolesGuard)
   @ApiOperation({ summary: 'Obtener usuarios' })
   @ApiOkResponse({
     description: 'Se obtuvieron los datos de todos los usuarios',
@@ -64,9 +56,9 @@ export class UsersController {
     return this.userUseCases.getAllUsers()
   }
 
-  @ApiOperation({ summary: 'Registrar usuario' })
-  @ApiOkResponse({ description: 'Registra al usuario' })
-  @ApiBadRequestResponse({ description: 'Error al registrar usuario' })
+  @ApiOperation({ summary: 'Crea usuario' })
+  @ApiOkResponse({ description: 'Crea un usuario' })
+  @ApiBadRequestResponse({ description: 'Error al crear usuario' })
   @ApiBody({
     type: CreateUserDto,
   })
@@ -75,7 +67,8 @@ export class UsersController {
     return this.userUseCases.createUser(user)
   }
 
-  @UseGuards(JwtAuthGuard) // http://192.168.0.3:3000/users/:id -> PUT
+  @HasRoles(JwtRole.CLIENT)
+  @UseGuards(JwtAuthGuard, JwtRolesGuard)
   @ApiOperation({ summary: 'Actualizar usuario' })
   @ApiOkResponse({ description: 'Usuario actualizado' })
   @ApiBadRequestResponse({ description: 'Error al actualizar usuario' })
@@ -105,12 +98,12 @@ export class UsersController {
       })
     )
     file: Express.Multer.File,
-    @Param('id', ParseIntPipe) id: number,
-    @Body() user: UpdateUserDto
+    @Param('id', ParseIntPipe) id: number
   ) {
-    return this.userUseCases.updateUserWithImage(file, id, user)
+    return this.userUseCases.updateUserWithImage(file, id)
   }
 
+  @HasRoles(JwtRole.ADMIN)
   @UseGuards(JwtAuthGuard)
   @ApiParam({
     name: 'id',

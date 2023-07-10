@@ -7,6 +7,7 @@ import appConfig from 'infrastructure/config/app.config'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+
   app.enableCors()
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: false }))
 
@@ -15,7 +16,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('API Usuario')
     .setDescription('API de usuario para el proyecto Banca')
-    .setVersion('0.1')
+    .setVersion('1.1.0')
     .addTag('banca')
     .addBearerAuth()
     .build()

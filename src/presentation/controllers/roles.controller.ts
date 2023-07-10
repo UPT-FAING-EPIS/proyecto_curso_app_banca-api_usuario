@@ -5,18 +5,25 @@ import { JwtAuthGuard } from 'infrastructure/auth/jwt-auth.guard'
 import { JwtRolesGuard } from 'infrastructure/auth/jwt-roles.guard'
 import { HasRoles } from 'infrastructure/auth/has-roles'
 import { RolesUseCases } from 'application/use-cases/RolesUseCases'
-import { ApiBadRequestResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger'
 
 @ApiTags('roles')
 @Controller('roles')
 export class RolesController {
   constructor(private rolesUseCases: RolesUseCases) {}
 
+  @HasRoles(JwtRole.ADMIN)
+  @UseGuards(JwtAuthGuard, JwtRolesGuard)
   @ApiOperation({ summary: 'Crear rol' })
   @ApiOkResponse({ description: 'Rol creado' })
   @ApiBadRequestResponse({ description: 'Error al crear rol' })
-  @HasRoles(JwtRole.ADMIN)
-  @UseGuards(JwtAuthGuard, JwtRolesGuard)
+  @ApiBearerAuth()
   @Post() // http://localhost:3000/roles -> POST
   create(@Body() rol: CreateRoleDto) {
     return this.rolesUseCases.createRole(rol)

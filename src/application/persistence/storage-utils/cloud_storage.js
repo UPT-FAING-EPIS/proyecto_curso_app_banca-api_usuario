@@ -3,7 +3,6 @@ const { format } = require('util');
 const { v4: uuidv4 } = require('uuid');
 const uuid = uuidv4();
 
-
 const storage = new Storage({
     projectId: "api-users-7d02b",
     keyFilename: './serviceAccountKey.json'
@@ -15,7 +14,7 @@ const bucket = storage.bucket("gs://api-users-7d02b.appspot.com");
  * Subir el archivo a Firebase Storage
  * file objeto que sera almacenado en Firebase Storage
  */
-module.exports = (file, pathImage) => {
+export default function uploadToFirebaseStorage(file, pathImage) {
     return new Promise((resolve, reject) => {
         
         if (pathImage) {
@@ -30,7 +29,6 @@ module.exports = (file, pathImage) => {
                         }
                     },
                     resumable: false
-
                 });
 
                 blobStream.on('error', (error) => {

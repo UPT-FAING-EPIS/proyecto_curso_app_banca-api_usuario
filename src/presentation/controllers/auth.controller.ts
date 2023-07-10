@@ -1,8 +1,6 @@
 import {
   Body,
   Controller,
-  HttpException,
-  HttpStatus,
   Post,
   Res,
 } from '@nestjs/common'
@@ -29,7 +27,7 @@ export class AuthController {
     type: RegisterAuthDto,
   })
   @Post('register') // http://localhost/auth/register -> POST
-  register(@Body() user: RegisterAuthDto, @Res() res: Response) {
+  register(@Body() user: RegisterAuthDto) {
     return this.authUseCases.register(user)
   }
 

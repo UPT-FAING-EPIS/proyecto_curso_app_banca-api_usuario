@@ -15,9 +15,9 @@ export class UsersUseCases {
 
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
-  async updateUserWithImage(file: Express.Multer.File, id: number, user: UpdateUserDto): Promise<User> {
+  async updateUserWithImage(file: Express.Multer.File, id: number): Promise<User> {
     this.logger.log('Update a user')
-    return this.commandBus.execute(new UpdateUserWithImageCommand(file, id, user))
+    return this.commandBus.execute(new UpdateUserWithImageCommand(file, id))
   }
 
   async updateUser(id: number, user: UpdateUserDto): Promise<User> {

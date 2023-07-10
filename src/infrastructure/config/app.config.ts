@@ -6,9 +6,9 @@ export default isEnvProduction
       db: {
         host: 'db1.c5odpn9hksgv.us-east-1.rds.amazonaws.com',
         port: 3306,
-        user: 'admin',
+        username: 'admin',
         password: 'UPT2023*',
-        name: 'users',
+        database: 'users',
       },
     }
   : {
@@ -16,8 +16,8 @@ export default isEnvProduction
       db: {
         host: 'localhost',
         port: 3306,
-        user: 'root',
+        username: 'root',
         password: 'alcbart12',
-        name: 'users',
+        database: 'users',
       },
     }

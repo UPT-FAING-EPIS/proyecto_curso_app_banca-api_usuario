@@ -1,29 +1,25 @@
+import { HttpException } from '@nestjs/common'
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { UpdateUserWithImageCommand } from 'application/commands/update-user-with-image.command'
 import { UsersRepository } from 'application/persistence/repos/UsersRepository'
-import storage from 'application/persistence/storage-utils/cloud_storage'
+import { UpdateUserCommand } from 'application/commands/update-user.command'
 
-@CommandHandler(UpdateUserWithImageCommand)
+
+@CommandHandler(UpdateUserCommand)
 export class UpdateUserCommandHandler
-  implements ICommandHandler<UpdateUserWithImageCommand>
+  implements ICommandHandler<UpdateUserCommand>
 {
   constructor(private readonly usersRepository: UsersRepository) {}
 
-  async execute(command: UpdateUserWithImageCommand) {
-    const url = await storage(command.file, command.file.originalname)
-    console.log('URL' + url)
-
-    if (!url) {
-      throw new Error('La imagen no se puede guardar')
-    }
-
+  async execute(command: UpdateUserCommand) {
     const userFound = await this.usersRepository.getById(command.id)
+    if (!userFound) throw new HttpException('Usuario no encontrado', 404)
 
-    if (!userFound) {
-      throw new Error('Usuario no existe')
-    }
-    command.user.image = url
     const updatedUser = Object.assign(userFound, command.user)
-    return this.usersRepository.create(updatedUser)
+
+    try {
+      return await this.usersRepository.update(command.id, updatedUser)
+    } catch (error) {
+      throw new HttpException(error.message, 409)
+    }
   }
 }
